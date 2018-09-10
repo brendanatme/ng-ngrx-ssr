@@ -1,14 +1,14 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
-import {enableProdMode} from '@angular/core';
+import { enableProdMode } from '@angular/core';
 // Express Engine
-import {ngExpressEngine} from '@nguniversal/express-engine';
+import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
-import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
-import {factory as healthcheckFactory} from 'ts-healthcheck-middleware';
+import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+import { factory as healthcheckFactory } from 'ts-healthcheck-middleware';
 
 import * as express from 'express';
-import {join} from 'path';
+import { join } from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./server/main');
 
 /**
  * add a healthcheck endpoint

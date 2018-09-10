@@ -50,6 +50,10 @@ export function reducer(
     }
 
     case ResourceActionTypes.LoadResources: {
+      return state;
+    }
+
+    case ResourceActionTypes.LoadResourcesComplete: {
       return adapter.addAll(action.payload.resources, state);
     }
 

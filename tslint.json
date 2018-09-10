@@ -93,6 +93,7 @@
       true,
       "always"
     ],
+    "trailing-comma": true,
     "triple-equals": [
       true,
       "allow-null-check"

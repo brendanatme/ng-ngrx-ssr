@@ -4,6 +4,7 @@ import { Resource } from './resource.model';
 
 export enum ResourceActionTypes {
   LoadResources = '[Resource] Load Resources',
+  LoadResourcesComplete = '[Resource] Load Resources Complete',
   AddResource = '[Resource] Add Resource',
   UpsertResource = '[Resource] Upsert Resource',
   AddResources = '[Resource] Add Resources',
@@ -17,6 +18,12 @@ export enum ResourceActionTypes {
 
 export class LoadResources implements Action {
   readonly type = ResourceActionTypes.LoadResources;
+
+  constructor() {}
+}
+
+export class LoadResourcesComplete implements Action {
+  readonly type = ResourceActionTypes.LoadResourcesComplete;
 
   constructor(public payload: { resources: Resource[] }) {}
 }
@@ -75,6 +82,7 @@ export class ClearResources implements Action {
 
 export type ResourceActions =
  LoadResources
+ | LoadResourcesComplete
  | AddResource
  | UpsertResource
  | AddResources
