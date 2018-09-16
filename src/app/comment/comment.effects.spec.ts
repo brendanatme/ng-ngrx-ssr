@@ -2,21 +2,21 @@ import { TestBed, inject } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { ResourceEffects } from './resource.effects';
+import { CommentEffects } from './comment.effects';
 
-describe('ResourceEffects', () => {
-  let actions$: Observable<any>;
-  let effects: ResourceEffects;
+describe('CommentEffects', () => {
+  const actions$: Observable<any> = new Observable();
+  let effects: CommentEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ResourceEffects,
-        provideMockActions(() => actions$)
-      ]
+        CommentEffects,
+        provideMockActions(() => actions$),
+      ],
     });
 
-    effects = TestBed.get(ResourceEffects);
+    effects = TestBed.get(CommentEffects);
   });
 
   it('should be created', () => {

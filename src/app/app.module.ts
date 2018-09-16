@@ -10,14 +10,17 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { Actions, EffectsModule } from '@ngrx/effects';
-import { ResourceEffects } from './resource/resource.effects';
-import * as fromResource from './resource/resource.reducer';
+import { PostEffects } from './post/post.effects';
+import * as fromPost from './post/post.reducer';
 import { ApiService } from './api.service';
+import { CommentEffects } from './comment/comment.effects';
+import * as fromComment from './comment/comment.reducer';
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-ngrx-ssr' }),
@@ -25,18 +28,18 @@ import { ApiService } from './api.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule' },
-      { path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule' }
+      { path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule' },
     ]),
     TransferHttpCacheModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreModule.forFeature('resource', fromResource.reducer),
-    EffectsModule.forRoot([ResourceEffects]),
+    StoreModule.forFeature('post', fromPost.reducer),
+    StoreModule.forFeature('comment', fromComment.reducer),
+    EffectsModule.forRoot([PostEffects, CommentEffects]),
   ],
   providers: [
     Actions,
     ApiService,
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

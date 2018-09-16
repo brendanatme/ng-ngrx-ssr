@@ -1,6 +1,6 @@
-import { reducer, initialState } from './resource.reducer';
+import { reducer, initialState } from './comment.reducer';
 
-describe('Resource Reducer', () => {
+describe('Comment Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

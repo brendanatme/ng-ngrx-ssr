@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators/index';
 
-const RESOURCE_KEY = makeStateKey('resource');
+const POST_KEY = makeStateKey('post');
+const COMMENT_KEY = makeStateKey('comment');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   constructor(
@@ -15,15 +16,29 @@ export class ApiService {
     private state: TransferState,
   ) { }
 
-  getResources() {
-    const resources = this.state.get(RESOURCE_KEY, null as any);
-    if (resources) {
-      return of(resources);
+  getPosts() {
+    const posts = this.state.get(POST_KEY, null as any);
+    if (posts) {
+      return of(posts);
     }
 
-    return this.http.get('https://jsonplaceholder.typicode.com/posts')
+    return this.http
+      .get('https://jsonplaceholder.typicode.com/posts')
       .pipe(
-        tap((res) => this.state.set(RESOURCE_KEY, res as any)),
+        tap((res) => this.state.set(POST_KEY, res as any)),
+      );
+  }
+
+  getComments() {
+    const comments = this.state.get(COMMENT_KEY, null as any);
+    if (comments) {
+      return of(comments);
+    }
+
+    return this.http
+      .get('https://jsonplaceholder.typicode.com/comments')
+      .pipe(
+        tap((res) => this.state.set(COMMENT_KEY, res as any)),
       );
   }
 }
